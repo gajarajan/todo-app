@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(180deg, #1817179d, #e2dcdc);
+  min-height: 750px;
+}
+
+.layout {
+  max-width: 500px;
+  margin: auto;
+  padding: 10px;
+
+  .submitadd {
+    background-color: rgb(236, 79, 79);
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    border-color: rgb(236, 79, 79);
+    align-items: center;
+    justify-content: center;
+
+  }
+  .submitedit {
+    background-color: rgb(23, 145, 12);
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    border-color: rgb(23, 145, 12);
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  p {
+    text-align: center;
+    color: red;
+    font-size: 20px;
+    font-weight: 100;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-style: italic;
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #000;
+    padding: 5px;
+    font-size: 18px;
+    outline: none;
+  }
+
+  .item {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.26);
+    padding: 10px 0;
+    margin: 10px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    padding-left: 5px;
+    font-size: 15px;
+
+    .itembutton {
+      float: right;
+      margin-right: 5px;
+
+      button {
+        margin-left: 10px;
+        background: none;
+        border: none;
+        padding: 1px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+
+  }
+
+  .clear {
+    float: right;
+    margin-bottom: 20px;
+
+    button {
+     width: 200px;
+      margin-left: 10px;
+      background: red;
+      border: none;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: black;
+      font-weight: 300;
+      font-size: 15px;
+    }
+  }
+  .completed{
+    margin-top: 20px;
+    .completedcell{
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 0;
+      margin: 10px 0;
+      border-radius: 5px;
+      overflow: hidden;
+      padding-left: 5px;
+      font-size: 15px;
+      color: white;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+ 
+}
