@@ -2,17 +2,17 @@ import React, { Component } from "react";
 
 export default class TodoInput extends Component {
   render() {
-    const { toDo, handleChange, addTodo, iseditItem } = this.props;
+    const { toDo, handleChange, addTodo, iseditTodo } = this.props;
     return (
-      <div>
-        <form onSubmit={addTodo}>
+      <div className="form">
+        <form onSubmit={addTodo} >
           <input value={toDo} type="text" onChange={handleChange}></input>
           <br />
           <button
             type="submit"
-            className={iseditItem ? "submitedit" : "submitadd"}
+            className={iseditTodo? "submitedit" : "submitadd"}
           >
-            {iseditItem ? "edit item" : "add item"}
+            {iseditTodo ? "edit item" : "add item"}
           </button>
         </form>
       </div>

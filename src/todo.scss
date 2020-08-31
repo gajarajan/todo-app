@@ -26,8 +26,8 @@ body {
     border-color: rgb(236, 79, 79);
     align-items: center;
     justify-content: center;
-
   }
+
   .submitedit {
     background-color: rgb(23, 145, 12);
     padding: 5px;
@@ -40,7 +40,6 @@ body {
     border-color: rgb(23, 145, 12);
     align-items: center;
     justify-content: center;
-
   }
 
   p {
@@ -68,30 +67,49 @@ body {
     outline: none;
   }
 
-  .item {
+  .todo {
     width: 100%;
     background: rgba(255, 255, 255, 0.26);
     padding: 10px 0;
     margin: 10px 0;
     border-radius: 5px;
     overflow: hidden;
-    padding-left: 5px;
+    // padding-left: 5px;
     font-size: 15px;
 
-    .itembutton {
-      float: right;
-      margin-right: 5px;
+    .todocheckbox {
+      width: 60%;
+      float: left;
+      overflow: hidden;
+      box-sizing: border-box;
 
-      button {
-        margin-left: 10px;
-        background: none;
-        border: none;
-        padding: 1px;
-        border-radius: 5px;
-        cursor: pointer;
+      .checkbox {
+        width: 10%;
+        float: left;
+      }
+
+      .list {
+        width: 90%;
+        float: right;
       }
     }
 
+    .todobutton {
+      width: 40%;
+      float: right;
+      align-items: right;
+      justify-content: right;
+
+      button {
+        padding-left: 10px;
+        background: none;
+        border: none;
+        padding-right: 0%;
+        margin-right: 0%;
+        cursor: pointer;
+        
+      }
+    }
   }
 
   .clear {
@@ -99,7 +117,7 @@ body {
     margin-bottom: 20px;
 
     button {
-     width: 200px;
+      width: 200px;
       margin-left: 10px;
       background: red;
       border: none;
@@ -111,9 +129,11 @@ body {
       font-size: 15px;
     }
   }
-  .completed{
+
+  .completed {
     margin-top: 20px;
-    .completedcell{
+
+    .completedcell {
       width: 100%;
       background: rgba(0, 0, 0, 0.5);
       padding: 10px 0;
@@ -127,5 +147,4 @@ body {
       text-transform: uppercase;
     }
   }
- 
 }

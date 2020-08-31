@@ -9,8 +9,8 @@ export default class Todo extends Component {
       todoList: [],
       message: "",
       toDo: "",
-      iD: uuid(),
-
+      id: uuid(),
+      iscompleted: false,
       iseditTodo: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -21,29 +21,35 @@ export default class Todo extends Component {
       toDo: e.target.value,
     });
   }
+  // Add the todo in list
   addTodo(event) {
     event.preventDefault();
-    const { todoList, toDo, iD } = this.state;
+    const { todoList, toDo, id } = this.state;
     if (toDo.length === 0) {
       this.setState({
         message: "no todo",
       });
     } else {
-      const newitem = {
-        id: iD,
+      const newTodo = {
+        id: id,
         title: toDo,
+        select: false,
       };
-      const updatedItems = [...todoList, newitem];
+      const updatedTodo = [...todoList, newTodo];
 
       this.setState({
-        todoList: updatedItems,
+        todoList: updatedTodo,
         toDo: "",
         message: "",
-        iD: uuid(),
+        id: uuid(),
         iseditTodo: false,
+        iscompleted: false,
       });
     }
   }
+  // checkTodo = () => {
+    
+  // };
   editTodo = (id) => {
     const remove = this.state.todoList.filter((todo) => {
       return todo.id !== id;
@@ -54,12 +60,13 @@ export default class Todo extends Component {
     this.setState({
       todoList: remove,
       toDo: filter.title,
-      iD: id,
+      id: id,
       iseditTodo: true,
+      iscompleted: false,
     });
   };
   removeTodo = (id) => {
-    const remove = this.state.Item.filter((todo) => {
+    const remove = this.state.todoList.filter((todo) => {
       return todo.id !== id;
     });
     this.setState({
@@ -73,22 +80,19 @@ export default class Todo extends Component {
     }
   };
   completedTodolist = (id) => {
-    const removeitem = this.state.Item.filter((item1) => {
-      return item1.id !== id;
+    const remove = this.state.todoList.filter((todo) => {
+      return todo.id !== id;
     });
-    const add = this.state.Item.filter((item1) => {
+    const completed = this.state.todoList.filter((item1) => {
       return item1.id === id;
     });
-    const newcompleted = {
-      id: id,
-      title: add.title,
-    };
-   
-    if (removeitem.length === 0) {
+
+    if (remove.length === 0) {
       this.setState({
-        message: "no item in list",
+        message: "no todo in list",
       });
     }
+    console.log(completed);
   };
   clearTodolist = () => {
     this.setState({
@@ -96,8 +100,16 @@ export default class Todo extends Component {
       message: "no todo",
     });
   };
+  deleteChecktodo=()=>{
+    const checktodo=this.state.todoList.filter((todo) => {
+      return todo.select !== true;
+    });
+    this.setState({
+      todoList:checktodo
+    })
+  }
   render() {
-    const { todoList, message,toDo, iseditTodo } = this.state;
+    const { todoList, message, toDo, iseditTodo } = this.state;
 
     return (
       <div className="layout">
@@ -121,6 +133,8 @@ export default class Todo extends Component {
           editTodo={this.editTodo}
           completedTodolist={this.completedTodolist}
           clearTodolist={this.clearTodolist}
+          // checkTodo={this.checkTodo}
+          deleteChecktodo={this.deleteChecktodo}
         />
       </div>
     );
