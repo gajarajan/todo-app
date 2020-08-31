@@ -29,7 +29,7 @@ export default class TodoList extends Component {
                   <div className="todocheckbox">
                     <div className="checkbox">
                       <input type="checkbox" checked={todo.select} key={todo.id} onChange={(event)=>{let checked=event.target.checked
-                     console.log(event.target.checked);
+                     
                      this.setState(
                         todoList.map((checktodo) =>{
                           if(todo.id ===checktodo.id){
