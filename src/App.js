@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import uuid from "uuid";
 import TodoInput from "./component/TodoInput";
 import TodoList from "./component/TodoList";
-export default class Todo extends Component {
+export default class TodoApp extends Component {
   constructor() {
     super();
     this.state = {
@@ -10,7 +10,6 @@ export default class Todo extends Component {
       message: "",
       toDo: "",
       id: uuid(),
-      iscompleted: false,
       iseditTodo: false,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -34,6 +33,7 @@ export default class Todo extends Component {
         id: id,
         title: toDo,
         select: false,
+        completed: false,
       };
       const updatedTodo = [...todoList, newTodo];
 
@@ -43,18 +43,15 @@ export default class Todo extends Component {
         message: "",
         id: uuid(),
         iseditTodo: false,
-        iscompleted: false,
       });
     }
   }
-  // checkTodo = () => {
-    
-  // };
+
   editTodo = (id) => {
-    const remove = this.state.todoList.filter((todo) => {
+    let remove = this.state.todoList.filter((todo) => {
       return todo.id !== id;
     });
-    const filter = this.state.todoList.find((todo) => {
+    let filter = this.state.todoList.find((todo) => {
       return todo.id === id;
     });
     this.setState({
@@ -62,11 +59,11 @@ export default class Todo extends Component {
       toDo: filter.title,
       id: id,
       iseditTodo: true,
-      iscompleted: false,
     });
   };
+  
   removeTodo = (id) => {
-    const remove = this.state.todoList.filter((todo) => {
+    let remove = this.state.todoList.filter((todo) => {
       return todo.id !== id;
     });
     this.setState({
@@ -80,19 +77,15 @@ export default class Todo extends Component {
     }
   };
   completedTodolist = (id) => {
-    const remove = this.state.todoList.filter((todo) => {
-      return todo.id !== id;
-    });
-    const completed = this.state.todoList.filter((item1) => {
-      return item1.id === id;
-    });
-
-    if (remove.length === 0) {
-      this.setState({
-        message: "no todo in list",
-      });
-    }
-    console.log(completed);
+    this.setState(
+      this.state.todoList.map((todo) => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      })
+    );
+    console.log(id);
   };
   clearTodolist = () => {
     this.setState({
@@ -100,14 +93,14 @@ export default class Todo extends Component {
       message: "no todo",
     });
   };
-  deleteChecktodo=()=>{
-    const checktodo=this.state.todoList.filter((todo) => {
+  deleteChecktodo = () => {
+    const checktodo = this.state.todoList.filter((todo) => {
       return todo.select !== true;
     });
     this.setState({
-      todoList:checktodo
-    })
-  }
+      todoList: checktodo,
+    });
+  };
   render() {
     const { todoList, message, toDo, iseditTodo } = this.state;
 
