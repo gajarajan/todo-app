@@ -54,8 +54,12 @@ export default class TodoApp extends Component {
     let filter = this.state.todoList.find((todo) => {
       return todo.id === id;
     });
+   let removetodo= remove.map((todo)=>{
+     todo.select=false
+     return todo
+   })
     this.setState({
-      todoList: remove,
+      todoList: removetodo,
       toDo: filter.title,
       id: id,
       iseditTodo: true,

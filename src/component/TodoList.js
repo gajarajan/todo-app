@@ -33,13 +33,15 @@ export default class TodoList extends Component {
                     todo.select = checked;
                     return todo;
                   })
+                  
                 );
               }}
-            /><span >select all</span>
+            />
             {todoList.map((todo) => {
               return (
-                <div className="todo" key={todo.id} >
-                  
+                
+                <div className={`todo ${todo.completed? "completedcolor":""}` } key={todo.id}  >
+                 
                   <div className="todocheckbox">
                     <div className="check">
                       <input
@@ -55,19 +57,20 @@ export default class TodoList extends Component {
                               if (todo.id === checktodo.id) {
                                 todo.select = checked;
                               }
+
                               return checktodo;
                             })
                           );
                         }}
                       />
                     </div>
-                    <div className="list">
+                    <div className={`list ${todo.completed? "completed":""}`}>
                       <span>{todo.title}</span>
                     </div>
                   </div>
                   <div className="todobutton">
                     <span onClick={() => removeTodo(todo.id)} className="span1">  <Clear/></span>
-                    <span onClick={() => editTodo(todo.id)}  className="span2"><Edit/></span>
+                    {todo.completed?"":<span onClick={() => editTodo(todo.id)}  className="span2"><Edit/></span>}
                     <span onClick={() => completedTodolist(todo.id)}  className="span3"><DoneRounded/></span>
                   </div>
                 </div>
