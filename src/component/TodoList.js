@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {Delete,Edit,Clear,Done} from '@material-ui/icons';
+import {Delete,Edit,Clear, DoneRounded} from '@material-ui/icons';
 export default class TodoList extends Component {
   render() {
     const {
@@ -18,13 +18,14 @@ export default class TodoList extends Component {
         {todoList.length > 0 && (
           <div>
             <div className="clear">
-              <button onClick={() => clearTodolist()}>clear list</button>
+              <button onClick={() => clearTodolist()}><Clear/></button>
             </div>
             <div className="clear">
               <button onClick={() => deleteChecktodo()}><Delete/></button>
             </div>
             <input
               type="checkbox"
+              className="Allcheck"
               onChange={(e) => {
                 let checked = e.target.checked;
                 this.setState(
@@ -34,15 +35,17 @@ export default class TodoList extends Component {
                   })
                 );
               }}
-            />
+            /><span >select all</span>
             {todoList.map((todo) => {
               return (
-                <div className="todo" key={todo.id}>
+                <div className="todo" key={todo.id} >
+                  
                   <div className="todocheckbox">
-                    <div className="checkbox">
+                    <div className="check">
                       <input
                         type="checkbox"
                         checked={todo.select}
+                        className="checkbox"
                         key={todo.id}
                         onChange={(event) => {
                           let checked = event.target.checked;
@@ -63,12 +66,9 @@ export default class TodoList extends Component {
                     </div>
                   </div>
                   <div className="todobutton">
-                    <span onClick={() => removeTodo(todo.id)}>  <Clear/></span>
-                    <span onClick={() => editTodo(todo.id)}><Edit/></span>
-
-                    <button onClick={() => completedTodolist(todo.id)}>
-                      <Done/>
-                    </button>
+                    <span onClick={() => removeTodo(todo.id)} className="span1">  <Clear/></span>
+                    <span onClick={() => editTodo(todo.id)}  className="span2"><Edit/></span>
+                    <span onClick={() => completedTodolist(todo.id)}  className="span3"><DoneRounded/></span>
                   </div>
                 </div>
               );
