@@ -1,6 +1,23 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {Delete,Edit,Clear, DoneRounded} from '@material-ui/icons';
+import { Delete, Edit, Clear, DoneRounded } from "@material-ui/icons";
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
+import { makeStyles } from "@material-ui/core/styles";
+const useStylesBootstrap = makeStyles((theme) => ({
+  arrow: {
+    color: theme.palette.common.black,
+  },
+  tooltip: {
+    backgroundColor: theme.palette.common.black,
+  },
+}));
+
+function BootstrapTooltip(props) {
+  const classes = useStylesBootstrap();
+
+  return <Tooltip arrow classes={classes} {...props} />;
+}
 export default class TodoList extends Component {
   render() {
     const {
@@ -18,10 +35,14 @@ export default class TodoList extends Component {
         {todoList.length > 0 && (
           <div>
             <div className="clear">
-              <button onClick={() => clearTodolist()}><Clear/></button>
+              <button onClick={() => clearTodolist()}>
+                <Clear />
+              </button>
             </div>
             <div className="clear">
-              <button onClick={() => deleteChecktodo()}><Delete/></button>
+              <button onClick={() => deleteChecktodo()}>
+                <Delete />
+              </button>
             </div>
             <input
               type="checkbox"
@@ -33,15 +54,15 @@ export default class TodoList extends Component {
                     todo.select = checked;
                     return todo;
                   })
-                  
                 );
               }}
             />
             {todoList.map((todo) => {
               return (
-                
-                <div className={`todo ${todo.completed? "completedcolor":""}` } key={todo.id}  >
-                 
+                <div
+                  className={`todo ${todo.completed ? "completedcolor" : ""}`}
+                  key={todo.id}
+                >
                   <div className="todocheckbox">
                     <div className="check">
                       <input
@@ -64,19 +85,73 @@ export default class TodoList extends Component {
                         }}
                       />
                     </div>
-                    <div className={`list ${todo.completed? "completed":""}`}>
+                    <div
+                      className={`list ${todo.completed ? "completed" : ""}`}
+                    >
                       <span>{todo.title}</span>
                     </div>
                   </div>
                   <div className="todobutton">
-                    <span onClick={() => removeTodo(todo.id)} className="span1">  <Clear/></span>
-                    {todo.completed?"":<span onClick={() => editTodo(todo.id)}  className="span2"><Edit/></span>}
-                    <span onClick={() => completedTodolist(todo.id)}  className="span3"><DoneRounded/></span>
+                    {todo.select ? (
+                      <BootstrapTooltip
+                        title="Remove Todo"
+                        placement="top-start"
+                        TransitionComponent={Zoom}
+                        arrow
+                        interactive
+                        enterDelay={0}
+                        leaveDelay={100}
+                      >
+                        <span
+                          onClick={() => removeTodo(todo.id)}
+                          className="span1"
+                        >
+                          <Clear />
+                        </span>
+                      </BootstrapTooltip>
+                    ) : (
+                      ""
+                    )}
+                    {todo.completed ? (
+                      ""
+                    ) : (
+                      <BootstrapTooltip
+                        title="Edit Todo"
+                        placement="top-start"
+                        TransitionComponent={Zoom}
+                        arrow
+                        interactive
+                        enterDelay={100}
+                        leaveDelay={200}
+                      >
+                        <span
+                          onClick={() => editTodo(todo.id)}
+                          className="span2"
+                        >
+                          <Edit />
+                        </span>
+                      </BootstrapTooltip>
+                    )}
+                    <BootstrapTooltip
+                      title="completedtodo"
+                      placement="top-start"
+                      TransitionComponent={Zoom}
+                      arrow
+                      interactive
+                      enterDelay={200}
+                      leaveDelay={300}
+                    >
+                      <span
+                        onClick={() => completedTodolist(todo.id)}
+                        className="span3"
+                      >
+                        <DoneRounded />
+                      </span>
+                    </BootstrapTooltip>
                   </div>
                 </div>
               );
             })}
-            
           </div>
         )}
       </div>

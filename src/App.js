@@ -8,6 +8,7 @@ export default class TodoApp extends Component {
     this.state = {
       todoList: [],
       message: "",
+      inputerror:"",
       toDo: "",
       id: uuid(),
       iseditTodo: false,
@@ -20,13 +21,12 @@ export default class TodoApp extends Component {
       toDo: e.target.value,
     });
   }
-  // Add the todo in list
   addTodo(event) {
     event.preventDefault();
     const { todoList, toDo, id } = this.state;
     if (toDo.length === 0) {
       this.setState({
-        message: "no todo",
+        inputerror: "empty todo",
       });
     } else {
       const newTodo = {
@@ -41,6 +41,7 @@ export default class TodoApp extends Component {
         todoList: updatedTodo,
         toDo: "",
         message: "",
+        inputerror:"",
         id: uuid(),
         iseditTodo: false,
       });
@@ -63,6 +64,7 @@ export default class TodoApp extends Component {
       toDo: filter.title,
       id: id,
       iseditTodo: true,
+      inputerror:"Todo Edit"
     });
   };
   
@@ -106,7 +108,7 @@ export default class TodoApp extends Component {
     });
   };
   render() {
-    const { todoList, message, toDo, iseditTodo } = this.state;
+    const { todoList, message, toDo, iseditTodo ,inputerror} = this.state;
 
     return (
       <div className="layout">
@@ -118,6 +120,7 @@ export default class TodoApp extends Component {
             toDo={toDo}
             handleChange={this.handleChange}
             iseditTodo={iseditTodo}
+            inputerror={inputerror}
             addTodo={(event) => {
               this.addTodo(event);
             }}
@@ -130,7 +133,6 @@ export default class TodoApp extends Component {
           editTodo={this.editTodo}
           completedTodolist={this.completedTodolist}
           clearTodolist={this.clearTodolist}
-          // checkTodo={this.checkTodo}
           deleteChecktodo={this.deleteChecktodo}
         />
       </div>
